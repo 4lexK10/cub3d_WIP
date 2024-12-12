@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/12 13:10:11 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:48:23 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
+
 typedef struct s_img
-{	void	*ptr;
+{
+	void	*ptr;
 	char	*addr;
 	int	bpp;
 	int	line_length;
@@ -31,8 +35,10 @@ typedef struct s_img
 typedef struct s_data
 {
 	char	*map;
-	t_img	img;
+	void	*mlx;
+	void	*win
 }	t_data;
 
+int	init_mlx(t_data *data);
 
 #endif
