@@ -6,7 +6,7 @@
 #    By: akloster <akloster@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 17:54:38 by akloster          #+#    #+#              #
-#    Updated: 2024/12/06 18:00:40 by akloster         ###   ########.fr        #
+#    Updated: 2024/12/12 13:09:02 by akloster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,19 @@ OBJ				=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 CC				=	cc
 
-CFLAGS				=	-Iincludes -Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror
 
 NAME				=	cub3d
 
 $(NAME):			$(OBJ_DIR) $(OBJ) 
 				make -C./libft
-				$(CC) $(CFLAGS) $(OBJ) $(LIBft) 
+				$(CC) $(OBJ) $(LIBft) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 all:				$(NAME)
 
 $(OBJ_DIR)%.o:			$(SRC_DIR)%.c $(HEADERS)
 				@mkdir -p $(dir $@)
-				$(CC) $(CFLAGS) -c $< -o $@
+				$(CC) $(CFLAGS) -Iincludes -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 
 $(OBJ_DIR):

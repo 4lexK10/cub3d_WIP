@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
+/*   By: akloster <akloster@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 11:49:34 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/12 12:58:42 by akloster         ###   ########.fr       */
+/*   Created: 2023/10/19 17:03:58 by akloster          #+#    #+#             */
+/*   Updated: 2023/10/23 12:25:49 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main(int ac, char **av)
+void	ft_putchar_fd(char c, int fd)
 {
-	t_data	data;
-
-	if (ac != 2)
-		return (ft_error("error: incorrect number of arguments"))
-	ft_memset(&data, 0, sizeof(t_data));
-	if (parser(av[1]), &data)
-		return (EXIT_FAILURE);
-	if (init_img	)
-	
+	write(fd, &c, 1);
 }
-
