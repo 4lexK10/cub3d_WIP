@@ -6,7 +6,7 @@
 #    By: akloster <akloster@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 17:54:38 by akloster          #+#    #+#              #
-#    Updated: 2024/12/12 13:09:02 by akloster         ###   ########.fr        #
+#    Updated: 2024/12/13 17:26:23 by akloster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ RM				=	rm -rf
 
 SRC_DIR				=	src/
 
-SRC				=	main.c
+SRC				=	main.c mlx_handling.c error_handling.c raycasting.c
 
 HEADERS				=	includes/cub3d.h
 
@@ -32,13 +32,13 @@ NAME				=	cub3d
 
 $(NAME):			$(OBJ_DIR) $(OBJ) 
 				make -C./libft
-				$(CC) $(OBJ) $(LIBft) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+				$(CC) $(CFLAGS) $(OBJ) $(LIBft) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 all:				$(NAME)
 
 $(OBJ_DIR)%.o:			$(SRC_DIR)%.c $(HEADERS)
 				@mkdir -p $(dir $@)
-				$(CC) $(CFLAGS) -Iincludes -I/usr/include -Imlx_linux -O3 -c $< -o $@
+				$(CC) -Iincludes -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 
 $(OBJ_DIR):
