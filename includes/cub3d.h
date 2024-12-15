@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/15 19:46:59 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:16:50 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ typedef struct s_data
 	void	*win;
 	int	nbr_column;
 }	t_data;
+
+typedef struct s_dda
+{
+	
+};
+
 
 int	init_mlx(t_data *data);
 int raycasting(t_data *data);
