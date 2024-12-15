@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:27:37 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/13 18:32:33 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/15 15:16:33 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 
 int raycasting(t_data *data)
 {
-	t_vector vector;
+	t_player	player;
+	float		cameraX;
+	float		ray[2];	
+	int		x;
 
-	get_player_vector(data, &vector);
-	
+	get_player_vector(data, &player);
+	// start DDA
+	while (++x < WINDOW_WIDTH)
+	cameraX = 2 * (float) x
 }
