@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:08:12 by akloster          #+#    #+#             */
-/*   Updated: 2023/11/07 15:03:32 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:03:25 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	i;
 	void	*ptr;
 
-	i = 0;
-	if (count * size > SIZE_MAX)
+	if (count * size > UINT_MAX)
 		return (NULL);
 	ptr = malloc(count * size);
 	if (!ptr)

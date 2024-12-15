@@ -6,7 +6,7 @@
 #    By: akloster <akloster@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 17:54:38 by akloster          #+#    #+#              #
-#    Updated: 2024/12/13 17:26:23 by akloster         ###   ########.fr        #
+#    Updated: 2024/12/15 13:16:57 by akloster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ RM				=	rm -rf
 
 SRC_DIR				=	src/
 
-SRC				=	main.c mlx_handling.c error_handling.c raycasting.c
+SRC				=	main.c mlx_handling.c error_handling.c raycasting.c vector_handling.c
 
 HEADERS				=	includes/cub3d.h
 
@@ -26,19 +26,19 @@ OBJ				=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 CC				=	cc
 
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	#-Wall -Wextra -Werror
 
 NAME				=	cub3d
 
 $(NAME):			$(OBJ_DIR) $(OBJ) 
 				make -C./libft
-				$(CC) $(CFLAGS) $(OBJ) $(LIBft) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+				$(CC) $(OBJ) $(LIBft) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 all:				$(NAME)
 
 $(OBJ_DIR)%.o:			$(SRC_DIR)%.c $(HEADERS)
 				@mkdir -p $(dir $@)
-				$(CC) -Iincludes -I/usr/include -Imlx_linux -O3 -c $< -o $@
+				$(CC) $(CFLAGS) -Iincludes -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 
 $(OBJ_DIR):

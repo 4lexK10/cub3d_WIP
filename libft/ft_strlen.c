@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:48:48 by akloster          #+#    #+#             */
-/*   Updated: 2023/10/17 16:48:48 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:00:42 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
-	char	*str;
 
-	str = (char *) s;
 	i = 0;
 	while (s[i] != '\0')
 		++i;
