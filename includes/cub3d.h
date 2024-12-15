@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/15 14:48:33 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:46:45 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_data
 int	init_mlx(t_data *data);
 int raycasting(t_data *data);
 int	ft_error(char *str);
-void	get_player_vector(t_data *data, t_vector *vector);
+void	get_player_vector(t_data *data, t_player *player);
 void	set_vector(float vector[2], float x, float y);
 
 #endif

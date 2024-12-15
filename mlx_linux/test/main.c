@@ -43,7 +43,7 @@ int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int endian, int t
 
 int	expose_win1(void *p)
 {
-  mlx_put_image_to_window(mlx,win1,im3,0,0);
+  mlx_put_image_to_window(mlx,win'1',im3,0,0);
 }
 
 int	expose_win2(void *p)
@@ -75,7 +75,7 @@ int	key_win3(int key,void *p)
 
 int	mouse_win1(int button,int x,int y, void *p)
 {
-  printf("Mouse in Win1, button %d at %dx%d.\n",button,x,y);
+  printf("Mouse in Win'1', button %d at %dx%d.\n",button,x,y);
 }
 
 int	mouse_win2(int button,int x,int y, void *p)
@@ -118,7 +118,7 @@ int	main()
   printf("OK\n");
 
   printf(" => Colormap sans event ...");
-  color_map_1(win1,WIN1_SX,WIN1_SY);
+  color_map_1(win'1',WIN1_SX,WIN1_SY);
   printf("OK\n");
   sleep(2);
 
@@ -133,16 +133,16 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  data1 = mlx_get_data_addr(im1,&bpp1,&sl1,&endian1);
-  printf("OK (bpp1: %d, sizeline1: %d endian: %d type: %d)\n",bpp1,sl1,endian1,
+  data1 = mlx_get_data_addr(im'1',&bpp'1',&sl'1',&endian1);
+  printf("OK (bpp1: %d, sizeline1: %d endian: %d type: %d)\n",bpp'1',sl'1',endian'1',
 	 ((t_img *)im1)->type);
 
   printf(" => Fill Image1 ...");
-  color_map_2(data1,bpp1,sl1,IM1_SX,IM1_SY,endian1, 1);
+  color_map_2(data'1',bpp'1',sl'1',IM1_SX,IM1_SY,endian'1', 1);
   printf("OK (pixmap : %d)\n",(int)((t_img *)im1)->pix);
 
   printf(" => Put Image1 ...");
-  mlx_put_image_to_window(mlx,win1,im1,20,20);
+  mlx_put_image_to_window(mlx,win'1',im'1',20,20);
   printf("OK\n");
   sleep(2);
 
@@ -166,13 +166,13 @@ int	main()
   printf("OK (pixmap : %d)\n",(int)((t_img *)im3)->pix);
 
   printf(" => Put Image3 ...");
-  mlx_put_image_to_window(mlx,win1,im3,20,20);
+  mlx_put_image_to_window(mlx,win'1',im3,20,20);
   printf("OK\n");
   sleep(2);
 
   printf(" => String ...");
-  mlx_string_put(mlx,win1,5,WIN1_SY/2,0xFF99FF,"String output");
-  mlx_string_put(mlx,win1,15,WIN1_SY/2+20,0x00FFFF,"MinilibX test");
+  mlx_string_put(mlx,win'1',5,WIN1_SY/2,0xFF99FF,"String output");
+  mlx_string_put(mlx,win'1',15,WIN1_SY/2+20,0x00FFFF,"MinilibX test");
   printf("OK\n");
   sleep(2);
 
@@ -188,8 +188,8 @@ int	main()
   sleep(2);
 
   printf(" => Put xpm ...");
-  mlx_put_image_to_window(mlx,win1,im2,0,0);
-  mlx_put_image_to_window(mlx,win1,im2,100,100);
+  mlx_put_image_to_window(mlx,win'1',im2,0,0);
+  mlx_put_image_to_window(mlx,win'1',im2,100,100);
   printf("OK\n");
   sleep(2);
 
@@ -205,9 +205,9 @@ int	main()
 
   printf(" 3rd window, Installing hooks ...");
   win3 = mlx_new_window(mlx,WIN1_SX,WIN1_SY,"Title3");
-  mlx_expose_hook(win1,expose_win1,0);
-  mlx_mouse_hook(win1,mouse_win1,0);
-  mlx_key_hook(win1,key_win1,0);
+  mlx_expose_hook(win'1',expose_win'1',0);
+  mlx_mouse_hook(win'1',mouse_win'1',0);
+  mlx_key_hook(win'1',key_win'1',0);
   mlx_expose_hook(win2,expose_win2,0);
   mlx_mouse_hook(win2,mouse_win2,0);
   mlx_key_hook(win2,key_win2,0);
