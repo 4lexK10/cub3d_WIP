@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/15 18:46:45 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:46:59 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_player
 
 typedef struct s_data
 {
-	char	*map;
+	char	**map;
 	void	*mlx;
 	void	*win;
 	int	nbr_column;
