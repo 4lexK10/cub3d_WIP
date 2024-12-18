@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/15 21:16:50 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/17 21:22:00 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdbool.h>
 #include "mlx.h"
 # include "../libft/libft.h"
 
@@ -35,6 +36,20 @@ typedef struct s_img
 	int	endian;
 }	t_img;
 
+typedef struct	s_ray
+{
+	float		cameraX;
+	float		cast[2];
+	float		side_dist[2];
+	float		delta_dist[2];
+	float		perp_dist;
+	int		step[2];
+	int		side;
+	bool		hit;
+	int		map_x;
+	int		map_y;
+}	t_ray;
+
 typedef struct s_player
 {
 	float pos[2];
@@ -50,10 +65,6 @@ typedef struct s_data
 	int	nbr_column;
 }	t_data;
 
-typedef struct s_dda
-{
-	
-};
 
 
 int	init_mlx(t_data *data);
