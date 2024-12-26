@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:31:03 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/26 13:54:37 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/26 21:40:02 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static void	set_FOV(t_player *player, char dir)
 	if (dir == 'N')
 		set_vector(player->dir, 0.0, 1.0);
 	if (dir == 'E')	
-		set_vector(player->dir, 1.0, 0.0);
+		set_vector(player->dir, -1.0, 0.0);
 	if (dir == 'S')	
 		set_vector(player->dir, 0.0, -1.0);
 	if (dir == 'W')	
-		set_vector(player->dir, -1.0, 0.0);
+		set_vector(player->dir, 1.0, 0.0);
 	if (player->dir[X] == 0)
 		set_vector(player->plane, 0.66, 0);
 	else
