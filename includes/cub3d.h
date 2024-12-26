@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/17 21:22:00 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/26 01:44:30 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,19 @@
 
 typedef struct s_img
 {
-	void	*ptr;
+	void	*ptr_img;
 	char	*addr;
 	int	bpp;
 	int	line_length;
 	int	endian;
 }	t_img;
+
+typedef struct s_wall
+{	
+	int	h;
+	int	start;
+	int	end;
+}	t_wall;
 
 typedef struct	s_ray
 {
@@ -62,15 +69,15 @@ typedef struct s_data
 	char	**map;
 	void	*mlx;
 	void	*win;
-	int	nbr_column;
 }	t_data;
 
-
-
 int	init_mlx(t_data *data);
-int raycasting(t_data *data);
+int	raycasting(t_data *data);
 int	ft_error(char *str);
 void	get_player_vector(t_data *data, t_player *player);
 void	set_vector(float vector[2], float x, float y);
+int	init_frame(t_data *data, t_img *frame);
+void	put_pixel(t_img *frame, int x, int y, int color);
+void	render_column(t_img *frame, t_ray *ray, int x);
 
 #endif

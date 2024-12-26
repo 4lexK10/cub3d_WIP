@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:27:37 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/17 21:22:25 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/26 01:55:48 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,34 @@ static void	dda(t_data *data, t_player *player, t_ray *ray)
 
 int raycasting(t_data *data)
 {
-	t_player	player
+	t_player	player;
 	t_ray		ray;
+	t_img		frame;
 	int		x;
 
 	get_player_vector(data, &player);
-	// start DDA
+	if (init_frame(data, &frame))
+		return (ft_error("Error: mlx\n"));
 	while (++x < WIN_WIDTH)
 	{
 		ray.cameraX = 2 * (float) x / (float) WIN_WIDTH - 1;
 		ray.cast[X] = player.dir[X] + player.plane[X] * ray.cameraX;
 		ray.cast[Y] = player.dir[Y] + player.plane[Y] * ray.cameraX;
-		map_x = (int) player.pos[X];
-		map_y = (int) player.pos[Y];
+		ray.map_x = (int) player.pos[X];
+		ray.map_y = (int) player.pos[Y];
 		ray.delta_dist[X] = 1e30;
 		ray.delta_dist[Y] = 1e30;
 		init_ray(&player, &ray);
-		while (!ray->hit)
+		while (!ray.hit)
 			dda(data, &player, &ray);
+		ray.perp_dist = ray.side_dist[X] - ray.delta_dist[X];
+		if (ray.side)
+			ray.perp_dist = ray.side_dist[Y] - ray.delta_dist[Y];
+		render_column(&frame, &ray, x);
 	}
+	mlx_put_image_to_window(data->mlx, data->win, frame.ptr_img, 0, 0);
+	mlx_destroy_image(data->mlx, frame.ptr_img);
+	return (0);
 }
 
 
