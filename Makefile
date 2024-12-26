@@ -6,7 +6,7 @@
 #    By: akloster <akloster@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 17:54:38 by akloster          #+#    #+#              #
-#    Updated: 2024/12/26 00:23:14 by akloster         ###   ########.fr        #
+#    Updated: 2024/12/26 18:17:56 by akloster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ CC				=	cc
 
 CFLAGS				=	-g3 #-Wall -Wextra -Werror 
 
-NAME				=	cub3d
+NAME				=	cub3D
 
 $(NAME):			$(OBJ_DIR) $(OBJ) 
 				make -C./libft

@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 17:28:40 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/26 01:39:50 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/26 14:30:14 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	render_column(t_img *frame, t_ray *ray, int x)
 		wall.end = WIN_HEIGHT - 1;
 	y = wall.start;
 	while (y <= wall.end)
-		put_pixel(frame, x, y++, 0xFFFFFFFF);
+	{
+		if (ray->side)
+			put_pixel(frame, x, y++, 0x808080);
+		else
+			put_pixel(frame, x, y++, 0xFFFFFF);
+	}
 }
 
