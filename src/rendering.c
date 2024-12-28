@@ -6,12 +6,19 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 17:28:40 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/26 14:30:14 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/28 02:13:53 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static void	put_pixel(t_img *frame, int x, int y, int color)
+{
+	char	*ptr_pixel;
+
+	ptr_pixel = frame->addr + (y * frame->line_length + x * (frame->bpp / 8));
+	*(unsigned int*)ptr_pixel = color;
+}
 
 void	render_column(t_img *frame, t_ray *ray, int x)
 {

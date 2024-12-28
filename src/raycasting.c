@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:27:37 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/26 18:28:15 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/28 03:00:30 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,27 @@ static void	dda(t_data *data, t_player *player, t_ray *ray)
 		ray->hit = true;
 }
 
-int raycasting(t_data *data)
+/*bool	done(t_data *data, t_player *player)
+{
+	
+}*/
+
+int raycasting(t_data *data, int keycode)
 {
 	t_player	player;
 	t_ray		ray;
 	t_img		frame;
 	int		x;
-
-	get_player_vector(data, &player);
+	if (keycode == START)
+		get_player_vector(data, &player);
+	else
+		move_player(data, &)
+	/*
+		-need player in data
+			change fctns using &player
+		-make move_player(keycode)
+	*/
+		
 	if (init_frame(data, &frame))
 		return (ft_error("Error: mlx\n"));
 	while (++x < WIN_WIDTH)

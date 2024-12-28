@@ -6,11 +6,42 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:18:11 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/26 00:36:46 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/28 02:54:16 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// hooking management 
+
+int	key_hook(int keycode, void *param);
+{
+	(t_data *) param;
+
+	if (keycode == ESC_KEY)
+	{
+		//free data
+		exit(0);
+	}
+	if (keycode == W_KEY)
+		raycasting(data, W_KEY);
+	if (keycode == A_KEY)
+		raycasting(data, A_KEY);
+	if (keycode == S_KEY)
+		raycasting(data, S_KEY);
+	if (keycode == D_KEY)
+		raycasting(data, D_KEY);
+}
+
+//int	mouse_hook(int button,int x,int y,void *param);
+//{
+//	if ()
+//}
+
+void	event_hook(t_data *data)
+{
+	
+}
 
 int	init_mlx(t_data *data)
 {
@@ -33,11 +64,4 @@ int	init_frame(t_data *data, t_img *frame)
 	return (0);
 }
 
-void	put_pixel(t_img *frame, int x, int y, int color)
-{
-	char	*ptr_pixel;
-
-	ptr_pixel = frame->addr + (y * frame->line_length + x * (frame->bpp / 8));
-	*(unsigned int*)ptr_pixel = color;
-}
 

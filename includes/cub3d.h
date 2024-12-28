@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/26 01:44:30 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/28 02:55:47 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # define WIN_HEIGHT 480
 # define X 0
 # define Y 1
+# define ESC_KEY 0xff1b
+# define W_KEY 0x0077
+# define A_KEY 0x0061
+# define S_KEY 0x0073
+# define D_KEY 0x0064
+# define START 0x0
 
 typedef struct s_img
 {
@@ -72,12 +78,10 @@ typedef struct s_data
 }	t_data;
 
 int	init_mlx(t_data *data);
-int	raycasting(t_data *data);
+int	raycasting(t_data *data, int keycode);
 int	ft_error(char *str);
 void	get_player_vector(t_data *data, t_player *player);
-void	set_vector(float vector[2], float x, float y);
 int	init_frame(t_data *data, t_img *frame);
-void	put_pixel(t_img *frame, int x, int y, int color);
 void	render_column(t_img *frame, t_ray *ray, int x);
 
 #endif
