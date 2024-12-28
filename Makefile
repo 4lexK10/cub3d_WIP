@@ -6,7 +6,7 @@
 #    By: akloster <akloster@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 17:54:38 by akloster          #+#    #+#              #
-#    Updated: 2024/12/26 18:17:56 by akloster         ###   ########.fr        #
+#    Updated: 2024/12/28 13:50:54 by akloster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_DIR				=	src/
 
 SRC				=	main.c mlx_handling.c error_handling.c \
 					raycasting.c vector_handling.c \
-					rendering.c
+					rendering.c tools.c
 
 HEADERS				=	includes/cub3d.h
 

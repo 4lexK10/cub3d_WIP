@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:18:11 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/28 02:54:16 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/28 14:06:34 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 // hooking management 
 
-int	key_hook(int keycode, void *param);
+int	key_hook(int keycode, void *param)
 {
-	(t_data *) param;
+	t_data *data;
 
+	data = (t_data *) param;
 	if (keycode == ESC_KEY)
 	{
 		//free data
@@ -31,6 +32,10 @@ int	key_hook(int keycode, void *param);
 		raycasting(data, S_KEY);
 	if (keycode == D_KEY)
 		raycasting(data, D_KEY);
+	if (keycode == LEFT_ARROW)
+		raycasting(data, LEFT_ARROW);
+	if (keycode == RIGHT_ARROW)
+		raycasting(data, RIGHT_ARROW);
 }
 
 //int	mouse_hook(int button,int x,int y,void *param);

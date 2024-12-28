@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/28 02:55:47 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/28 14:27:49 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define S_KEY 0x0073
 # define D_KEY 0x0064
 # define START 0x0
+# define LEFT_ARROW 0xff51
+# define RIGHT_ARROW 0xff53
 
 typedef struct s_img
 {
@@ -72,9 +74,10 @@ typedef struct s_player
 
 typedef struct s_data
 {
-	char	**map;
-	void	*mlx;
-	void	*win;
+	char		**map;
+	t_player	player;
+	void		*mlx;
+	void		*win;
 }	t_data;
 
 int	init_mlx(t_data *data);
@@ -83,5 +86,10 @@ int	ft_error(char *str);
 void	get_player_vector(t_data *data, t_player *player);
 int	init_frame(t_data *data, t_img *frame);
 void	render_column(t_img *frame, t_ray *ray, int x);
+float	absf(float nbr);
+void	pre_init(t_player *player, t_ray *ray, int x);
+void	set_vector(float vector[2], float x, float y);
+void	rotation(t_player *player, float a);
+void	move_player(t_player *player, int keycode);
 
 #endif

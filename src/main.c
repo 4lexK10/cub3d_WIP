@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:49:34 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/28 02:13:25 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/28 14:30:34 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char *fake_map[] = {
 "100000000000001",
 "100000000000001",
 "100000000000001",
-"1N00000000000111",
-"1000000000000001",
+"100000000000111",
+"10000W0000000001",
 "10100000000100001",
 "10000000000000111",
 "111111111111111"};
@@ -31,13 +31,13 @@ int	main(int ac, char **av)
 	(void) av;
 	if (ac != 2)
 		return (ft_error("error: incorrect number of arguments"));
-	ft_memset(&data, '0', sizeof(t_data));
+	ft_memset(&data, 0, sizeof(t_data));
 	/*if (parser(av[1]), &data)
 		return (EXIT_FAILURE);*/
 	data.map = fake_map;
 	if (init_mlx(&data))
 		return (EXIT_FAILURE);	
 	event_hook(&data);	
-	raycasting(&data);
+	raycasting(&data, START);
 	mlx_loop(data.mlx);
 }
