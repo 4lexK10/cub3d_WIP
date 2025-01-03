@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/28 14:27:49 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:35:10 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define START 0x0
 # define LEFT_ARROW 0xff51
 # define RIGHT_ARROW 0xff53
+# define KEY_DOWN 2
+# define FOV 0.66666
 
 typedef struct s_img
 {
@@ -91,5 +93,7 @@ void	pre_init(t_player *player, t_ray *ray, int x);
 void	set_vector(float vector[2], float x, float y);
 void	rotation(t_player *player, float a);
 void	move_player(t_player *player, int keycode);
+void	event_hook(t_data *data);
+void	print_player(t_player *player, char *msg);
 
 #endif

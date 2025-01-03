@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:18:11 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/28 14:06:34 by akloster         ###   ########.fr       */
+/*   Updated: 2024/12/31 15:41:22 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // hooking management 
 
-int	key_hook(int keycode, void *param)
+static int	key_hook(int keycode, void *param)
 {
 	t_data *data;
 
@@ -25,7 +25,10 @@ int	key_hook(int keycode, void *param)
 		exit(0);
 	}
 	if (keycode == W_KEY)
+	{	
+		printf("keycode = %x\n", keycode);
 		raycasting(data, W_KEY);
+	}
 	if (keycode == A_KEY)
 		raycasting(data, A_KEY);
 	if (keycode == S_KEY)
@@ -45,7 +48,10 @@ int	key_hook(int keycode, void *param)
 
 void	event_hook(t_data *data)
 {
-	
+	void	*param;
+
+	param = (void *) data;
+	mlx_hook(data->win, KEY_DOWN, 1L<<0, &key_hook, param);	
 }
 
 int	init_mlx(t_data *data)

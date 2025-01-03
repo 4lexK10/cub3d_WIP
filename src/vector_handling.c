@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:31:03 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/28 14:27:53 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/03 14:04:35 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	set_FOV(t_player *player, char dir)
 		set_vector(player->dir, 0.0, -1.0);
 	if (dir == 'W')	
 		set_vector(player->dir, 1.0, 0.0);
-	set_vector(player->plane, 0.0, 0.66);
+	set_vector(player->plane, 0.0, FOV);
 	if (player->dir[X] == 0)
-		set_vector(player->plane, 0.66, 0);
+		set_vector(player->plane, FOV, 0);
 }
 
 static void	get_pos(char **map, int *i, int *j)
@@ -45,9 +45,9 @@ static void	get_pos(char **map, int *i, int *j)
 static void	check_wall(char **map, t_player *player, int i, int j)
 {
 	if (map[i][j - 1] == '1')
-		player->pos[X] += 0.01;
+		player->pos[X] += 0.05;
 	if (map[i - 1][j] == '1')
-		player->pos[Y] += 0.01;
+		player->pos[Y] += 0.05;
 }
 
 void	get_player_vector(t_data *data, t_player *player)
@@ -61,13 +61,23 @@ void	get_player_vector(t_data *data, t_player *player)
 	set_FOV(player, data->map[i][j]);
 }
 
-
 void	move_player(t_player *player, int keycode)
 {
-	if (keycode == LEFT_ARROW)	
-		rotation(player, 0.1);
-	if (keycode == RIGHT_ARROW)	
-		rotation(player, -0.1);
+	if (keycode == LEFT_ARROW)
+		rotation(player, -0.05);
+	if (keycode == RIGHT_ARROW)
+		rotation(player, 0.05);
+	player->plane[X] = (player->dir[Y] * FOV) /
+		sqrtf(powf(player->dir[X], 2) + powf(player->dir[Y], 2));
+	if (player->dir[Y] > 0 && player->plane[X] > 0)
+		player->plane[X] = -player->plane[X];
+	if (player->dir[Y] < 0 && player->plane[X] < 0)
+		player->plane[X] = -player->plane[X];
+	player->plane[Y] = sqrtf(powf(FOV, 2) - powf(player->plane[X], 2));
+	if (player->dir[X] < 0 && player->plane[Y] > 0)
+		player->plane[Y] = -player->plane[Y];
+	if (player->dir[X] > 0 && player->plane[Y] < 0)
+		player->plane[Y] = -player->plane[Y];
 }
 
 

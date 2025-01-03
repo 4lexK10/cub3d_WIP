@@ -6,14 +6,14 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 11:58:30 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/28 14:28:27 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:58:17 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 float	absf(float nbr)
-{// should i overflow check from min float to max float or fuck it? most probs fuck it
+{// should i overflow check from min float to max float or fuck it? most prob fuck it
 	if (nbr < 0)
 		return (nbr * -1.0);
 	return (nbr);
@@ -21,8 +21,8 @@ float	absf(float nbr)
 
 void	rotation(t_player *player, float a)
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 
 	x = player->dir[X];
 	y = player->dir[Y];
