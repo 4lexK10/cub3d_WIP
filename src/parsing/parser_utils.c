@@ -3,42 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboumahd <lboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 15:06:11 by lboumahd          #+#    #+#             */
-/*   Updated: 2024/12/28 15:25:36 by lboumahd         ###   ########.fr       */
+/*   Updated: 2025/01/03 23:00:26 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	get_size(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i] && str[i] != '\n')
+		i++;
+	return (i);
+}
 char    *add_to_line(char *map_line, char *line)
 {
     int		size;
 	int		i;
-	char	*tab;
+	char	*arr;
     
     i = 0;
-	size = get_size (map_line, line);
-	tab = malloc(sizeof(char) * size + 2);
-	if (tab == NULL)
+	if (line[0] == '\n')
+            line[0] = ' ';
+	size = get_size(map_line) + get_size(line);
+	arr = malloc(sizeof(char) * size + 2);
+	if (arr == NULL)
 		return (NULL);
 	while (map_line && map_line[i])
 	{
-		tab[i] = map_line[i];
+		arr[i] = map_line[i];
 		i++;
 	}
 	while (*line)
-	{
-		tab[i] = *line;
-		i++;
-		line++;
-	}
-	tab[size] = ';';
-	tab[size + 1] = '\0';
+		arr[i++] = *line++;
+	arr[size] = ';';
+	arr[size + 1] = '\0';
 	if (s1)
 		free(s1);
-	return (tab);
+	return (arr);
 }
 
 void    change_to_matrix(t_map *map)

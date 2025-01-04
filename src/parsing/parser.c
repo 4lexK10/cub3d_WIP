@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboumahd <lboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 20:50:36 by lboumahd          #+#    #+#             */
-/*   Updated: 2024/12/28 15:25:36 by lboumahd         ###   ########.fr       */
+/*   Updated: 2025/01/04 13:59:49 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,18 @@ static int get_number_of_lines(char *path)
     return (line_count);
 }
 
-int get_first_info(t_map *map, char *line)
-{
-    //get_ infos TXT RGB 
-}
 void get_raw_data(t_map *map, int fd)
 {
     char *line;
 
     while ((line = get_next_line(fd)))
     {
-        if (line[0] == '\n')
-            line[0] = ' ';
-        if(!check_valid_line(line))
-            ft_error("invalid char\n");
-        if(!get_first_info(map, line))
-            map->map_line = add_to_line(map->map_line, line); 
+        if(!get_first_info(map->info, line))
+        {
+            if(!check_valid_line(line))
+                ft_error("invalid char\n");
+            map->map_arr = add_to_line(map->map_arr, line);
+        }
         free(line);
     }
     change_to_matrix(map);

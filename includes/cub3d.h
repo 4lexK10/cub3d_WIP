@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboumahd <lboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/28 15:25:36 by lboumahd         ###   ########.fr       */
+/*   Updated: 2025/01/03 23:00:28 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_info{
 typedef struct s_map
 {
     char            *line;
-    char            *map_line;
+    char            *map_arr;
     char            **map_tab;
     int             width;
     int             height;

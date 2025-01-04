@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
+/*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:50:53 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/13 17:23:39 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/04 13:59:48 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void free_split(char **split_line)
+{
+    int i = 0;
+
+    if (!split_line)
+        return;
+    while (split_line[i])
+        free(split_line[i++]);
+    free(split_line);
+}
 
 int	ft_error(char *str)
 {
