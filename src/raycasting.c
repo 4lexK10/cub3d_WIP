@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:27:37 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/03 10:57:34 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/04 20:52:53 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	init_ray(t_player *player, t_ray *ray, int x)
 		ray->delta_dist[X] = absf(1.0 / ray->cast[X]);
 	if (ray->cast[Y] != 0)
 		ray->delta_dist[Y] = absf(1.0 / ray->cast[Y]);
+	if (/*x == 1 || */x == WIN_WIDTH / 2/* || x == WIN_WIDTH - 1*/)
+		printf("delta_dist[X] = %f\ndelta_dist[Y] = %f\n", ray->delta_dist[X], ray->delta_dist[Y]);
 	if (ray->cast[X] < 0)
 	{
 		ray->step[X] = -1;
@@ -28,7 +30,7 @@ static void	init_ray(t_player *player, t_ray *ray, int x)
 	else
 	{
 		ray->step[X] = 1;
-		ray->side_dist[X] = (player->pos[X] + 1 - player->pos[X]) * ray->delta_dist[X];
+		ray->side_dist[X] = (ray->map_x + 1 - player->pos[X]) * ray->delta_dist[X];
 	}
 	if (ray->cast[Y] < 0)
 	{
@@ -38,7 +40,7 @@ static void	init_ray(t_player *player, t_ray *ray, int x)
 	else
 	{
 		ray->step[Y] = 1;
-		ray->side_dist[Y] = (player->pos[Y] + 1 - player->pos[Y]) * ray->delta_dist[Y];
+		ray->side_dist[Y] = (ray->map_y + 1 - player->pos[Y]) * ray->delta_dist[Y];
 	}
 }
 
@@ -60,13 +62,11 @@ static void	dda(t_data *data, t_ray *ray)
 		ray->hit = true;
 }
 
-
-
 int raycasting(t_data *data, int keycode)
 {
-	t_ray		ray;
-	t_img		frame;
-	int		x;
+	t_ray	ray;
+	t_img	frame;
+	int	x;
 
 	if (keycode == START)
 	{
@@ -74,7 +74,7 @@ int raycasting(t_data *data, int keycode)
 	}
 	else
 	{
-		move_player(&data->player, keycode);
+		move_player(data->map, &data->player, keycode);
 	}
 	if (init_frame(data, &frame))
 		return (ft_error("Error: mlx\n"));

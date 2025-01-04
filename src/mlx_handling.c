@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:18:11 by akloster          #+#    #+#             */
-/*   Updated: 2024/12/31 15:41:22 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/04 11:44:37 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,17 @@ static int	key_hook(int keycode, void *param)
 		//free data
 		exit(0);
 	}
-	if (keycode == W_KEY)
-	{	
-		printf("keycode = %x\n", keycode);
+	else if (keycode == W_KEY)
 		raycasting(data, W_KEY);
-	}
-	if (keycode == A_KEY)
+	else if (keycode == A_KEY)
 		raycasting(data, A_KEY);
-	if (keycode == S_KEY)
+	else if (keycode == S_KEY)
 		raycasting(data, S_KEY);
-	if (keycode == D_KEY)
+	else if (keycode == D_KEY)
 		raycasting(data, D_KEY);
-	if (keycode == LEFT_ARROW)
+	else if (keycode == LEFT_ARROW)
 		raycasting(data, LEFT_ARROW);
-	if (keycode == RIGHT_ARROW)
+	else if (keycode == RIGHT_ARROW)
 		raycasting(data, RIGHT_ARROW);
 }
 

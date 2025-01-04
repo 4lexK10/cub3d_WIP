@@ -6,23 +6,23 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 11:58:30 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/03 12:58:17 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:04:46 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	absf(float nbr)
-{// should i overflow check from min float to max float or fuck it? most prob fuck it
+double	absf(double nbr)
+{// should i overflow check from min double to max double or fuck it? most prob fuck it
 	if (nbr < 0)
 		return (nbr * -1.0);
 	return (nbr);
 }
 
-void	rotation(t_player *player, float a)
+void	rotation(t_player *player, double a)
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 
 	x = player->dir[X];
 	y = player->dir[Y];
@@ -30,7 +30,25 @@ void	rotation(t_player *player, float a)
 	player->dir[Y] = sinf(a) * x + cosf(a) * y;
 }
 
-void	set_vector(float vector[2], float x, float y)
+void	translation(char **map, t_player *player, int keycode)
+{	
+	if (keycode == W_KEY)
+	{
+		if (map[(int) player->pos[Y]][(int) (player->pos[X] + player->dir[X] * MOVE_SPEED)] != '1')
+			player->pos[X] += player->dir[X] * MOVE_SPEED;
+		if (map[(int) (player->pos[Y] + player->dir[Y] * MOVE_SPEED)][(int) player->pos[X]] != '1')
+			player->pos[Y] += player->dir[Y] * MOVE_SPEED;
+	}
+	else if (keycode == S_KEY)
+	{
+		if (map[(int) player->pos[Y]][(int) (player->pos[X] - player->dir[X] * MOVE_SPEED)] != '1')
+			player->pos[X] -= player->dir[X] * MOVE_SPEED;
+		if (map[(int) (player->pos[Y] - player->dir[Y] * MOVE_SPEED)][(int) player->pos[X]] != '1')
+			player->pos[Y] -= player->dir[Y] * MOVE_SPEED;
+	}
+}
+
+void	set_vector(double vector[2], double x, double y)
 {
 	vector[X] = x;
 	vector[Y] = y;
@@ -39,7 +57,7 @@ void	set_vector(float vector[2], float x, float y)
 void	pre_init(t_player *player, t_ray *ray, int x)
 {
 	ray->hit = false;
-	ray->cameraX = 2 * (float) x / (float) WIN_WIDTH - 1;
+	ray->cameraX = 2 * (double) x / (double) WIN_WIDTH - 1;
 	ray->cast[X] = player->dir[X] + player->plane[X] * ray->cameraX;
 	ray->cast[Y] = player->dir[Y] + player->plane[Y] * ray->cameraX;
 	ray->map_x = (int) player->pos[X];
