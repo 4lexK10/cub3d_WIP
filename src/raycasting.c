@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:27:37 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/04 20:52:53 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:05:41 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,9 @@ int raycasting(t_data *data, int keycode)
 	int	x;
 
 	if (keycode == START)
-	{
 		get_player_vector(data, &data->player);
-	}
 	else
-	{
 		move_player(data->map, &data->player, keycode);
-	}
 	if (init_frame(data, &frame))
 		return (ft_error("Error: mlx\n"));
 	while (++x < WIN_WIDTH)

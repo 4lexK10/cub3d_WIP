@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:49:34 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/04 21:28:26 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:40:54 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ int	main(int ac, char **av)
 	ft_memset(&data, 0, sizeof(t_data));
 	/*if (parser(av[1]), &data)
 		return (EXIT_FAILURE);*/
+	data.texture_N = "forevernevermore.xpm";
+	data.texture_S = "detroit_D.xpm";
+	data.texture_E = "rain.xpm";
+	data.texture_W = "u_cant_lie.xpm";	
 	data.map = fake_map;
 	if (init_mlx(&data))
 		return (EXIT_FAILURE);	

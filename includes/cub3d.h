@@ -1,4 +1,4 @@
-
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 09:20:46 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:37:57 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ typedef struct s_player
 
 typedef struct s_data
 {
+	char	*texture_N;
+	char	*texture_S;
+	char	*texture_W;
+	char	*texture_E;
 	char		**map;
 	t_player	player;
 	void		*mlx;

@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:18:11 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/04 11:44:37 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:20:23 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	init_mlx(t_data *data)
 }
 
 int	init_frame(t_data *data, t_img *frame)
-{
+{	
 	frame->ptr_img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!frame->ptr_img)
 		return (1);
