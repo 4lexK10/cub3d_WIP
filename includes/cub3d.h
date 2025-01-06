@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 17:37:57 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/06 20:33:16 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,38 @@ typedef struct	s_ray
 	int		map_y;
 }	t_ray;
 
-typedef struct s_player
+typedef struct	s_player
 {
 	double pos[2];
 	double dir[2];
 	double plane[2];
 }	t_player;
 
+typedef struct	s_colors
+{
+	char		code;
+	int		color;
+	struct s_colors	*next;
+}	t_colors;
+
+typedef struct	s_texture
+{
+	char		*path;
+	char		*pixel;
+	t_colors	*colors;
+}	t_texture;
+
+typedef struct s_info
+{
+	t_texture	texture_N;
+	t_texture	texture_S;
+	t_texture	texture_W;
+	t_texture	texture_E;
+}	t_info;
+
 typedef struct s_data
 {
-	char	*texture_N;
-	char	*texture_S;
-	char	*texture_W;
-	char	*texture_E;
+	t_info		info;
 	char		**map;
 	t_player	player;
 	void		*mlx;
@@ -113,5 +132,6 @@ void	move_player(char **map, t_player *player, int keycode);
 void	event_hook(t_data *data);
 void	print_player(t_player *player, char *msg);
 void	translation(char **map, t_player *player, int keycode);
+int	init_textures(t_data *data);
 
 #endif

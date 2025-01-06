@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:49:34 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 17:40:54 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/06 19:00:44 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int	main(int ac, char **av)
 	ft_memset(&data, 0, sizeof(t_data));
 	/*if (parser(av[1]), &data)
 		return (EXIT_FAILURE);*/
-	data.texture_N = "forevernevermore.xpm";
-	data.texture_S = "detroit_D.xpm";
-	data.texture_E = "rain.xpm";
-	data.texture_W = "u_cant_lie.xpm";	
+	data.info.texture_N.path = "forevernevermore.xpm";
+	data.info.texture_S.path = "detroit_D.xpm";
+	data.info.texture_E.path = "rain.xpm";
+	data.info.texture_W.path = "u_cant_lie.xpm";	
 	data.map = fake_map;
-	if (init_mlx(&data))
+	if (init_mlx(&data) || init_textures(&data))
 		return (EXIT_FAILURE);	
 	raycasting(&data, START);
 	event_hook(&data);	
