@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/04 20:55:04 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/06 09:20:46 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define RIGHT_ARROW 0xff53
 # define KEY_DOWN 2
 # define FOV 0.66666
-# define MOVE_SPEED 0.08
+# define MOVE_SPEED 0.1
 
 typedef struct s_img
 {
