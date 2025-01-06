@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:49:34 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 19:00:44 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/06 20:35:48 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 	data.info.texture_E.path = "rain.xpm";
 	data.info.texture_W.path = "u_cant_lie.xpm";	
 	data.map = fake_map;
-	if (init_mlx(&data) || init_textures(&data))
+	if (init_mlx(&data)/* || init_textures(&data)*/)
 		return (EXIT_FAILURE);	
 	raycasting(&data, START);
 	event_hook(&data);	
