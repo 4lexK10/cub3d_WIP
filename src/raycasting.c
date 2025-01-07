@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:27:37 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 17:05:41 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/07 09:45:21 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	init_ray(t_player *player, t_ray *ray, int x)
 		ray->delta_dist[X] = absf(1.0 / ray->cast[X]);
 	if (ray->cast[Y] != 0)
 		ray->delta_dist[Y] = absf(1.0 / ray->cast[Y]);
-	if (/*x == 1 || */x == WIN_WIDTH / 2/* || x == WIN_WIDTH - 1*/)
-		printf("delta_dist[X] = %f\ndelta_dist[Y] = %f\n", ray->delta_dist[X], ray->delta_dist[Y]);
+//	if (/*x == 1 || */x == WIN_WIDTH / 2/* || x == WIN_WIDTH - 1*/)
+//		printf("delta_dist[X] = %f\ndelta_dist[Y] = %f\n", ray->delta_dist[X], ray->delta_dist[Y]);
 	if (ray->cast[X] < 0)
 	{
 		ray->step[X] = -1;
@@ -86,7 +86,7 @@ int raycasting(t_data *data, int keycode)
 	}
 	mlx_put_image_to_window(data->mlx, data->win, frame.ptr_img, 0, 0);
 	mlx_destroy_image(data->mlx, frame.ptr_img);
-	print_player(&data->player, "end ray");
+	//print_player(&data->player, "end ray");
 	return (0);
 }
 

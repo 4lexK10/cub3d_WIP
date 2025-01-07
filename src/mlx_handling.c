@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:18:11 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 18:20:23 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:15:02 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	key_hook(int keycode, void *param)
 	data = (t_data *) param;
 	if (keycode == ESC_KEY)
 	{
-		//free data
+		free_all(data);
 		exit(0);
 	}
 	else if (keycode == W_KEY)

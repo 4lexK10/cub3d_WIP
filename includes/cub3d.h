@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 20:33:16 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:06:20 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdbool.h>
-#include "mlx.h"
+# include "mlx.h"
 # include "../libft/libft.h"
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 720
+# define TEX_WIDTH 100
+# define TEX_HEIGHT 100
 # define X 0
 # define Y 1
 # define ESC_KEY 0xff1b
@@ -87,18 +89,18 @@ typedef struct	s_player
 	double plane[2];
 }	t_player;
 
-typedef struct	s_colors
+typedef struct	s_dictionary
 {
-	char		code;
-	int		color;
-	struct s_colors	*next;
-}	t_colors;
+	char			code;
+	int			color;
+	struct s_dictionary	*next;
+}	t_dictionary;
 
 typedef struct	s_texture
 {
 	char		*path;
-	char		*pixel;
-	t_colors	*colors;
+	char		*pixels;
+	t_dictionary	*dico;
 }	t_texture;
 
 typedef struct s_info
@@ -133,5 +135,6 @@ void	event_hook(t_data *data);
 void	print_player(t_player *player, char *msg);
 void	translation(char **map, t_player *player, int keycode);
 int	init_textures(t_data *data);
+void	free_all(t_data *data);
 
 #endif

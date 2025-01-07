@@ -6,7 +6,7 @@
 #    By: akloster <akloster@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 17:54:38 by akloster          #+#    #+#              #
-#    Updated: 2025/01/06 17:41:19 by akloster         ###   ########.fr        #
+#    Updated: 2025/01/07 10:01:40 by akloster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ RM				=	rm -rf
 
 SRC_DIR				=	src/
 
-SRC				=	main.c mlx_handling.c error_handling.c \
-					raycasting.c vector_handling.c \
-					rendering.c tools.c \
-					throw_aways.c \
+SRC				=	main.c mlx_handling.c error_handling.c	\
+					raycasting.c vector_handling.c		\
+					rendering.c tools.c texture_handling.c	\
+					throw_aways.c 				\
 
 HEADERS				=	includes/cub3d.h
 
@@ -29,13 +29,13 @@ OBJ				=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 CC				=	cc
 
-CFLAGS				=	-g3 #-Wall -Wextra -Werror 
+CFLAGS				=	-g3  #-Wall -Wextra -Werror 
 
 NAME				=	cub3D
 
 $(NAME):			$(OBJ_DIR) $(OBJ) 
 				make -C./libft
-				$(CC) $(OBJ) $(LIBft) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+				$(CC) $(OBJ) $(LIBft) -fsanitize=address -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 all:				$(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:40:47 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/04 21:08:44 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/07 09:56:06 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_mod_strdup(char const *s, int i_nl)
 	if (i_nl >= 0)
 		i = i_nl + 1;
 	else
-		i = ft_strlen(s);
+		i = ft_mod_strlen(s);
 	str = (char *)malloc((size_t)(1 + i) * sizeof(char));
 	if (!str)
 		return (NULL);
@@ -63,7 +63,7 @@ int	finder(char *s)
 		return (-1);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_mod_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -73,7 +73,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = -1;
 	if (!s1 || !s2)
 		return (NULL);
-	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	str = (char *)malloc((ft_mod_strlen(s1) + ft_mod_strlen(s2) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	while (s1[++i] != '\0')
