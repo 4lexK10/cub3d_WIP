@@ -6,7 +6,7 @@
 /*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:49:34 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/07 09:30:26 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/07 09:40:07 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,20 @@ void	init_data(t_data *data, char *path)
 // }
 
 ////////////////////////////TESTTTT//////////////////////////////////////////////////////
-#include "cub3d.h"
-#include <fcntl.h> // For open()
-#include <stdlib.h> // For malloc()
-#include <stdio.h> // For perror()
+
 
 int main(int ac, char **av)
 {
     t_data data;
     int fd;
 
-    // Check argument count
     if (ac != 2)
     {
         fprintf(stderr, "Usage: %s <map_file.cub>\n", av[0]);
         return (EXIT_FAILURE);
     }
 
-    // Open the file
+ 
     fd = open(av[1], O_RDONLY);
     if (fd < 0)
     {
@@ -93,28 +89,25 @@ int main(int ac, char **av)
         return (EXIT_FAILURE);
     }
 
-    // Initialize the data structure
+
     init_data(&data, av[1]);
 
-    // Parse the map file
     init_parsing(&data, fd);
 
-    // Print parsed data for testing
     printf("Parsed Textures:\n");
     printf("North: %s\n", data.info->texture_N);
     printf("South: %s\n", data.info->texture_S);
     printf("West: %s\n", data.info->texture_W);
     printf("East: %s\n", data.info->texture_E);
 
-    // printf("\nRGB Values:\n");
-    // printf("Floor: %d, %d, %d\n", data.info->c_floor[0], data.info->c_floor[1], data.info->c_floor[2]);
-    // printf("Sky: %d, %d, %d\n", data.info->c_sky[0], data.info->c_sky[1], data.info->c_sky[2]);
+    printf("\nRGB Values:\n");
+    printf("Floor: %d, %d, %d\n", data.info->c_floor[0], data.info->c_floor[1], data.info->c_floor[2]);
+    printf("Sky: %d, %d, %d\n", data.info->c_sky[0], data.info->c_sky[1], data.info->c_sky[2]);
 
     printf("\nMap Layout:\n");
     for (int i = 0; data.raw_map->map_tab && data.raw_map->map_tab[i]; i++)
         printf("%s\n", data.raw_map->map_tab[i]);
 
-    // Free allocated memory
     if (data.info)
     {
         free(data.info->texture_N);
