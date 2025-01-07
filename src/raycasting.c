@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:27:37 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/07 09:45:21 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:12:11 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int raycasting(t_data *data, int keycode)
 		ray.perp_dist = ray.side_dist[X] - ray.delta_dist[X];
 		if (ray.side)
 			ray.perp_dist = ray.side_dist[Y] - ray.delta_dist[Y];
-		render_column(&frame, &ray, x);
+		render_column(data, &frame, &ray, x);
 	}
 	mlx_put_image_to_window(data->mlx, data->win, frame.ptr_img, 0, 0);
 	mlx_destroy_image(data->mlx, frame.ptr_img);

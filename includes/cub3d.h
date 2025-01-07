@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/07 11:06:20 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:56:06 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ typedef struct s_img
 	int	bpp;
 	int	line_length;
 	int	endian;
+	int	width;
+	int	height;
+	int	*data;
 }	t_img;
 
 typedef struct s_wall
@@ -66,6 +69,12 @@ typedef struct s_wall
 	int	h;
 	int	start;
 	int	end;
+	double	x;
+	int	tex_X;
+	int	tex_Y;
+	double	pos;
+	double	step;
+	
 }	t_wall;
 
 typedef struct	s_ray
@@ -92,7 +101,7 @@ typedef struct	s_player
 typedef struct	s_dictionary
 {
 	char			code;
-	int			color;
+	unsigned int		color;
 	struct s_dictionary	*next;
 }	t_dictionary;
 
@@ -100,6 +109,7 @@ typedef struct	s_texture
 {
 	char		*path;
 	char		*pixels;
+	int		*pixies;
 	t_dictionary	*dico;
 }	t_texture;
 
@@ -109,6 +119,8 @@ typedef struct s_info
 	t_texture	texture_S;
 	t_texture	texture_W;
 	t_texture	texture_E;
+	unsigned int	color_C;
+	unsigned int	color_F;
 }	t_info;
 
 typedef struct s_data
@@ -125,7 +137,7 @@ int	raycasting(t_data *data, int keycode);
 int	ft_error(char *str);
 void	get_player_vector(t_data *data, t_player *player);
 int	init_frame(t_data *data, t_img *frame);
-void	render_column(t_img *frame, t_ray *ray, int x);
+void	render_column(t_data *data, t_img *frame, t_ray *ray, int x);
 double	absf(double nbr);
 void	pre_init(t_player *player, t_ray *ray, int x);
 void	set_vector(double vector[2], double x, double y);
