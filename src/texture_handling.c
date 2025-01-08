@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:03:04 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/07 17:07:19 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/08 08:07:51 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static int	create_node(t_dictionary **head, char *str)
 	if (!(*head))
 		*head = new;
 	new->code = str[1];
-	printf("\n\nstr %s", str);
+	//printf("\n\nstr %s", str);
 	new->color = 0;
 	i = 4;
 	while (str[++i])
 	{
-		printf("%ccreat nod-> %u\n",*str, new->color);
+		//printf("%ccreat nod-> %u\n",*str, new->color);
 		if (ft_isdigit(str[i]))
 		{
 			new->color = new->color * 16 + str[i] - '0';
@@ -88,6 +88,7 @@ static	void	load_img(t_data *data, t_texture *tex, char *path)
 	img.ptr_img = mlx_xpm_file_to_image(data->mlx, path, &img.width, &img.height);
 	img.data = mlx_get_data_addr(img.ptr_img, &img.bpp, &img.line_length, &img.endian);
 	tex->pixies = (int *)malloc(img.width * img.height * sizeof(int));
+	printf("tex H: %d\ntex W: %d\n", img.height, img.width);
 	if (!tex->pixies)
 		return (ft_error("error: malloc failed"));
 	while (++y < img.height)

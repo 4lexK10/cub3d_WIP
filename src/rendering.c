@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 17:28:40 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/07 21:09:04 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/08 07:56:16 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ static unsigned int	get_color(t_data *data, t_ray *ray, int x, int y)
 {
 	char	c;
 
-	if (ray->side && data->player.dir[Y] < 0)
+	if (ray->side && ray->cast[Y] < 0)
 		return (data->info.texture_S.pixies[y * 100 + x]);
-	else if (ray->side && data->player.dir[Y] > 0)
+	else if (ray->side && ray->cast[Y] > 0)
 		return (data->info.texture_N.pixies[y * 100 + x]);
-	else if (!ray->side && data->player.dir[X] > 0)
+	else if (!ray->side && ray->cast[X] > 0)
 		return (data->info.texture_W.pixies[y * 100 + x]);
-	else if (!ray->side && data->player.dir[X] < 0)
+	else if (!ray->side && ray->cast[X] < 0)
 		return (data->info.texture_E.pixies[y * 100 + x]);
 }
 
@@ -117,13 +117,13 @@ void	render_column(t_data *data, t_img *frame, t_ray *ray, int x)
 	while (y <= wall.end)
 	{
 		wall.tex_Y = (int) wall.pos & (TEX_HEIGHT - 1);
-		if (x == 10)
-			printf("%2f\n", wall.step);
+		//if (x == 10)
+			//printf("%2f\n", wall.step);
 		wall.pos += wall.step;
 		put_pixel(frame, x, y, get_color(data, ray, wall.tex_X, wall.tex_Y));
 		++y;
-		if (x == WIN_WIDTH / 2)
-			printf("side: %d\n", ray->side);
+		//if (x == WIN_WIDTH / 2)
+		//	printf("side: %d\ndir (%F, %F)\n\n", ray->side, data->player.dir[X], data->player.dir[Y]);
 	}
 	y = -1;
 	while (++y < wall.start)
