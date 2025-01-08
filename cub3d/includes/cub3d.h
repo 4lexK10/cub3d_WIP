@@ -6,7 +6,7 @@
 /*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 23:57:13 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/08 01:29:57 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef struct s_info{
 	char	*path;
 	int		width;
 	int height;
-	int c_floor[3];
-	int c_sky[3];
+	unsigned long c_floor_hex;
+	unsigned long c_sky_hex;
 	char	*texture_N;
 	char	*texture_S;
 	char	*texture_W;
@@ -93,9 +93,9 @@ void	init_parsing(t_data *data, int fd);
 void	init_data(t_data *data, char *path);
 
 //first_info
-int get_first_info(t_info *info, char *line);
+int get_first_info(t_map *map, t_info *info, char *line);
 char *get_texture(char **split_line);
-
+unsigned long	process_rgb_input(char *line);
 //parser 
 void get_raw_data(t_data *data, int fd);
 int get_number_of_lines(char *path);
