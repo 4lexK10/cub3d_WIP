@@ -6,7 +6,7 @@
 /*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 20:50:36 by lboumahd          #+#    #+#             */
-/*   Updated: 2025/01/07 21:16:37 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/08 13:44:02 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,106 @@
 
 int check_infos(t_info *infos)
 {
-    //check validity path
     if(!infos->texture_E || !infos->texture_N || !infos->texture_S || !infos->texture_W)
         return (0);
-    //cjheck validity rgb
     return(1);
 }
-int get_number_of_lines(char *path)
+int get_width(char *line)
 {
-    int     fd;
-    char    *line;
-    int     line_count;
+    int width = 0;
 
-    line_count = 0;
-    fd = open(path, O_RDONLY);
-    if (fd < 0)
-       ft_error("erro open");
-    line = get_next_line(fd);
-    while (line)
-    {
-        line_count++;
-        free(line);
-        line = get_next_line(fd);
-    }
-    close(fd);
-    return (line_count);
+    if (!line)
+        return (0);
+    while (line[width])
+        width++;
+    return (width);
 }
+int get_height(char **map)
+{
+    int height = 0;
+
+    if (!map)
+        return (0);
+
+    while (map[height])
+        height++;
+    return (height);
+}
+
+int check_first_last_line(char *line)
+{
+    int j = 0;
+
+    while (line[j])
+    {
+        if (line[j] != '1')
+            return (0);
+        j++;
+    }
+    return (1);
+}
+
+int check_borders(char *line)
+{
+    int len = get_width(line);
+
+    if (line[0] != '1' || line[len - 1] != '1')
+        return (0);
+    return (1);
+}
+
+int check_surrounding_walls(char **map, int i, int j)
+{
+    if (map[i][j] == ' ')
+    {
+        if ((j > 0 && map[i][j - 1] != '1') ||
+            (j < get_width(map[i]) - 1 && map[i][j + 1] != '1') ||
+            (i > 0 && map[i - 1][j] != '1') ||
+            (map[i + 1] && map[i + 1][j] != '1'))
+            return (0);
+    }
+    return (1);
+}
+
+int check_inner_lines(char **map, int i)
+{
+    int j = 0;
+
+    if (!check_borders(map[i]))
+        return (0);
+
+    while (map[i][j])
+    {
+        if (!check_surrounding_walls(map, i, j))
+            return (0);
+        j++;
+    }
+    return (1);
+}
+
+int check_walls(t_map *raw_map)
+{
+    int i = 0;
+    char **map;
+
+    map = raw_map->map_tab;
+    if (!map || !map[0])
+        return (0);
+
+    if (!check_first_last_line(map[0]) || !check_first_last_line(map[get_height(map) - 1]))
+        return (0); 
+
+    i = 1;
+    while (map[i + 1])
+    {
+        if (!check_inner_lines(map, i))
+            return (0);
+        i++;
+    }
+
+    return (1);
+}
+
 int check_valid_line(char *line)
 {
     int i;
@@ -73,7 +147,11 @@ void get_raw_data(t_data *data, int fd)
         }
     }
     change_to_matrix(data->raw_map);
-    // if(!check_walls(map->map_tab))
-    //     ft_error("map not closed");
+   
+    if(!check_walls(data->raw_map))
+        {
+            ft_error("map not closed");
+            exit(1);
+        }
     close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:49:34 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/08 01:31:14 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/08 13:24:09 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,22 @@ void	init_parsing(t_data *data, int fd)
 {
 	//check existence + validity of files 
     get_raw_data(data, fd);//fill fd into **raw_map
-	data->map = data->raw_map->map_tab; // a voir how to allocate
+	data->map = data->raw_map->map_tab;
+    //  printf("\nMap Layout now:\n");
+    // for (int i = 0; data->map && data->map[i]; i++)
+    //     printf("%s\n", data->map[i]); // a voir how to allocate
     //check extension
 	//check validity  RGB - Txture - map
 	//player position a voir avec alberto 
 }
 void	init_data(t_data *data, char *path)
-{
-	data->raw_map = malloc(sizeof(t_map));
+{   
+    (void)path;	
+    data->raw_map = malloc(sizeof(t_map));
 	if (!data->raw_map)
 		ft_error("Mem allocation\n");
 	//first_clean(path);
-    data->raw_map->line_count = get_number_of_lines(path);
+   // data->raw_map->line_count = get_number_of_lines(path);
 	data->raw_map->height = 0;
 	data->raw_map->width = 0;
 	data->info = malloc(sizeof(t_info)); // free !!!!
@@ -103,9 +107,9 @@ int main(int ac, char **av)
     printf("\nRawMap Layout:\n");
     for (int i = 0; data.raw_map->map_tab && data.raw_map->map_tab[i]; i++)
         printf("%s\n", data.raw_map->map_tab[i]);
-     printf("\nMap Layout:\n");
-    for (int i = 0; data.map && data.map[i]; i++)
-        printf("%s\n", data.map[i]);
+    //  printf("\nMap Layout:\n");
+    // for (int i = 0; data.map && data.map[i]; i++)
+    //     printf("%s\n", data.map[i]);
 
     if (data.info)
     {

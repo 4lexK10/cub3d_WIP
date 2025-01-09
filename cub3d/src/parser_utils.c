@@ -6,7 +6,7 @@
 /*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 15:06:11 by lboumahd          #+#    #+#             */
-/*   Updated: 2025/01/07 20:18:52 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/08 13:17:05 by linaboumahd      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char    *add_to_line(char *map_line, char *line)
     
     i = 0;
 	if (line[0] == '\n')
-            printf("hey\n");
+            line[0] = ' ';
 	size = get_size(map_line) + get_size(line);
 	arr = malloc(sizeof(char) * size + 2);
 	if (arr == NULL)
