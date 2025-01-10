@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:03:04 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/08 08:07:51 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/09 22:27:22 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	get_img(t_texture *tex, int fd)
 	return (EXIT_SUCCESS);
 }
 
-static	void	load_img(t_data *data, t_texture *tex, char *path)
+static int	load_img(t_data *data, t_texture *tex, char *path)
 {
 	t_img	img;
 	int	x;
@@ -86,18 +86,21 @@ static	void	load_img(t_data *data, t_texture *tex, char *path)
 
 	y = -1;
 	img.ptr_img = mlx_xpm_file_to_image(data->mlx, path, &img.width, &img.height);
-	img.data = mlx_get_data_addr(img.ptr_img, &img.bpp, &img.line_length, &img.endian);
+	if (!img.ptr_img)
+		return (ft_error("error: malloc failed"));
+	img.data = (int *)mlx_get_data_addr(img.ptr_img, &img.bpp, &img.line_length, &img.endian);
 	tex->pixies = (int *)malloc(img.width * img.height * sizeof(int));
 	printf("tex H: %d\ntex W: %d\n", img.height, img.width);
 	if (!tex->pixies)
-		return (ft_error("error: malloc failed"));
+		return (mlx_destroy_image(data->mlx, img.ptr_img), ft_error("error: malloc failed"));
 	while (++y < img.height)
 	{
 		x = -1;
 		while (++x < img.width)
-			tex->pixies[y * img.width + x] = (int) img.data[y * img.width + x];
+			tex->pixies[y * img.width + x] = img.data[y * img.width + x];
 	}
 	mlx_destroy_image(data->mlx, img.ptr_img);
+	return (EXIT_SUCCESS);
 }
 
 static int	get_texture(t_data *data, t_texture *tex)
@@ -110,7 +113,8 @@ static int	get_texture(t_data *data, t_texture *tex)
 		return (ft_error("error: open failed"));
 //	for (t_dictionary *temp = tex->dico; temp; temp = temp->next)
 //		printf("%c -> %u\n", temp->code, temp->color);
-	load_img(data, tex, tex->path);
+	if (load_img(data, tex, tex->path))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -148,10 +152,10 @@ static int	not_get_texture(t_texture *tex)
 
 int	init_textures(t_data *data)
 {
-	if (get_texture(data, &data->info.texture_N.path)
-		|| get_texture(data, &data->info.texture_S.path)
-		|| get_texture(data, &data->info.texture_E.path)
-		|| get_texture(data, &data->info.texture_W.path))
+	if (get_texture(data, &data->info.texture_N)
+		|| get_texture(data, &data->info.texture_S)
+		|| get_texture(data, &data->info.texture_E)
+		|| get_texture(data, &data->info.texture_W))
 		return (EXIT_FAILURE);
 }
 

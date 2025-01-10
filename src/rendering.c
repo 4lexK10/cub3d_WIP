@@ -6,29 +6,27 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 17:28:40 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/08 07:56:16 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/09 22:55:05 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	put_pixel(t_img *frame, int x, int y, unsigned int color)
+static void	no_put_pixel(t_img *frame, int x, int y, unsigned int color)
 {
 	char	*ptr_pixel;
 
-	ptr_pixel = frame->addr + (y * frame->line_length
+	ptr_pixel = (void *)frame->data + (y * frame->line_length
 		+ x * (frame->bpp / 8));
 	//if (x == 10)
 	//	printf("%u\n", color);
 	*(unsigned int*)ptr_pixel = color;
 }
 
-static void	no_put_pixel(t_img *frame, int x, int y, unsigned int color)
+static void	put_pixel(t_img *frame, int x, int y, unsigned int color)
 {
-	if (x < 0 || y < 0 || x > frame->width || y > frame->height
-		|| (y * frame->width + x) >= (frame->width * frame->height - 1))
-		return ;
-	else
+	if (x >= 0 && y >= 0 && x <= frame->width && y >= frame->height
+		&& ((y * frame->width + x) <= (frame->width * frame->height - 1)))
 		frame->data[y * frame->width + x] = color;
 }
 
