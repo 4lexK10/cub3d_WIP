@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 11:58:30 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/06 10:09:52 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/14 00:06:38 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,33 @@ void	rotation(t_player *player, double a)
 	player->dir[Y] = sinf(a) * x + cosf(a) * y;
 }
 
-void	translation(char **map, t_player *player, int keycode)
+static int	wall_check(char **map, t_player *player, double x, double y)
 {
-	if (keycode == W_KEY && map[(int) (player->pos[Y] + player->dir[Y] * MOVE_SPEED)]
-		[(int) (player->pos[X] + player->dir[X] * MOVE_SPEED)] != '1')
-		set_vector(player->pos, player->pos[X] + player->dir[X] 
-			* MOVE_SPEED, player->pos[Y] + player->dir[Y] * MOVE_SPEED);
-	else if (keycode == S_KEY && map[(int) (player->pos[Y] - player->dir[Y] * MOVE_SPEED)]
-		[(int) (player->pos[X] - player->dir[X] * MOVE_SPEED)] != '1')
-		set_vector(player->pos, player->pos[X] - player->dir[X]
-			* MOVE_SPEED, player->pos[Y] - player->dir[Y] * MOVE_SPEED);
-	else if (keycode == A_KEY && map[(int) (player->pos[Y] - player->dir[X] * MOVE_SPEED)]
-		[(int) (player->pos[X] + player->dir[Y] * MOVE_SPEED)] != '1')
-		set_vector(player->pos, player->pos[X] + player->dir[Y]
-			* MOVE_SPEED, player->pos[Y] - player->dir[X] * MOVE_SPEED);
-	else if (keycode == D_KEY && map[(int) (player->pos[Y] + player->dir[X] * MOVE_SPEED)]
-		[(int) (player->pos[X] - player->dir[Y] * MOVE_SPEED)] != '1')
-		set_vector(player->pos, player->pos[X] - player->dir[Y]
-			* MOVE_SPEED, player->pos[Y] + player->dir[X] * MOVE_SPEED);
+	//print_player(player, "wall_check");
+	if (map[(int) player->pos[Y]][(int) x] != '1')
+		set_vector(player->pos, x, player->pos[Y]);
+	if (map[(int) y][(int) player->pos[X]] != '1')
+		set_vector(player->pos, player->pos[X], y);
 }
 
-void	set_vector(double vector[2], double x, double y)
+void	translation(char **map, t_player *player, int keycode)
 {
-	vector[X] = x;
-	vector[Y] = y;
+	if (keycode == W_KEY)
+		wall_check(map, player
+			, player->pos[X] + player->dir[X] * MOVE_SPEED
+			, player->pos[Y] + player->dir[Y] * MOVE_SPEED);
+	else if (keycode == S_KEY)
+		wall_check(map, player
+			, player->pos[X] - player->dir[X] * MOVE_SPEED
+			, player->pos[Y] - player->dir[Y] * MOVE_SPEED);
+	else if (keycode == A_KEY)
+		wall_check(map, player
+			, player->pos[X] + player->dir[Y] * MOVE_SPEED
+			, player->pos[Y] - player->dir[X] * MOVE_SPEED);
+	else if (keycode == D_KEY)
+		wall_check(map, player
+			, player->pos[X] - player->dir[Y] * MOVE_SPEED
+			, player->pos[Y] + player->dir[X] * MOVE_SPEED);
 }
 
 void	pre_init(t_player *player, t_ray *ray, int x)

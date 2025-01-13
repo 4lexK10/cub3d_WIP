@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:50:53 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/07 11:28:37 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/13 22:32:10 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,11 @@ int	ft_error(char *str)
 	return (EXIT_FAILURE);
 }
 
-static void	free_dico(t_dictionary **dico)
-{
-	t_dictionary	*temp;
-
-	while (*dico)
-	{
-		temp = (*dico)->next;
-		free((*dico));
-		*dico = temp;
-	}
-}
-
 static void	free_texture(t_texture *tex)
 {
 	// free path to texture
-	free(tex->pixels);	
-	tex->pixels = NULL;
-	free_dico(&tex->dico);
+	free(tex->pixies);	
+	tex->pixies = NULL;
 }
 
 void	free_all(t_data *data)

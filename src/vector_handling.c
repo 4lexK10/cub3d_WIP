@@ -6,35 +6,41 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:31:03 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/04 15:44:47 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/14 00:14:24 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	set_vector(double vector[2], double x, double y)
+{
+	vector[X] = x;
+	vector[Y] = y;
+}
 
 static void	set_FOV(t_player *player, char dir)
 {
 	if (dir == 'N')
 	{
-		set_vector(player->dir, 0.0, 1.0);
+		set_vector(player->dir, 0.0, 1);
 		set_vector(player->plane, -FOV, 0.0);
 	}
 	else if (dir == 'E')	
 	{
-		set_vector(player->dir, -1.0, 0.0);
+		set_vector(player->dir, -1, 0.0);
 		set_vector(player->plane, 0.0, -FOV);
 	}
 	else if (dir == 'S')	
 	{
-		set_vector(player->dir, 0.0, -1.0);
+		set_vector(player->dir, 0.0, -1);
 		set_vector(player->plane, FOV, 0.0);
 	}
 	else if (dir == 'W')	
 	{
-		set_vector(player->dir, 1.0, 0.0);
+		set_vector(player->dir, 1, 0.0);
 		set_vector(player->plane, 0.0, FOV);
 	}
+	rotation(player, 0.001);
 }
 
 static void	get_pos(char **map, int *i, int *j)
@@ -51,14 +57,6 @@ static void	get_pos(char **map, int *i, int *j)
 	}
 }
 
-static void	check_wall(char **map, t_player *player, int i, int j)
-{
-	if (map[i][j - 1] == '1')
-		player->pos[X] += 0.05;
-	if (map[i - 1][j] == '1')
-		player->pos[Y] += 0.05;
-}
-
 void	get_player_vector(t_data *data, t_player *player)
 {
 	int	i;
@@ -66,7 +64,10 @@ void	get_player_vector(t_data *data, t_player *player)
 
 	get_pos(data->map, &i, &j);
 	set_vector(player->pos, (double) j, (double) i);
-	check_wall(data->map, player, i, j);
+	if (data->map[i][j - 1] == '1')
+		player->pos[X] += 0.05;
+	if (data->map[i - 1][j] == '1')
+		player->pos[Y] += 0.05;
 	set_FOV(player, data->map[i][j]);
 }
 

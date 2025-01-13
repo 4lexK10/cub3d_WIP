@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/13 14:08:34 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/13 22:30:53 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,19 +98,10 @@ typedef struct	s_player
 	double plane[2];
 }	t_player;
 
-typedef struct	s_dictionary
-{
-	char			code;
-	unsigned int		color;
-	struct s_dictionary	*next;
-}	t_dictionary;
-
 typedef struct	s_texture
 {
 	char		*path;
-	char		*pixels;
 	int		*pixies;
-	t_dictionary	*dico;
 }	t_texture;
 
 typedef struct s_info
@@ -144,7 +135,7 @@ void	set_vector(double vector[2], double x, double y);
 void	rotation(t_player *player, double a);
 void	move_player(char **map, t_player *player, int keycode);
 void	event_hook(t_data *data);
-void	print_player(t_player *player, char *msg);
+void	print_player(t_player *player, char *msg); // <---- delete!!
 void	translation(char **map, t_player *player, int keycode);
 int	init_textures(t_data *data);
 void	free_all(t_data *data);
