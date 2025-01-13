@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 17:28:40 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/09 22:55:05 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:13:07 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ static void	no_put_pixel(t_img *frame, int x, int y, unsigned int color)
 
 static void	put_pixel(t_img *frame, int x, int y, unsigned int color)
 {
-	if (x >= 0 && y >= 0 && x <= frame->width && y >= frame->height
-		&& ((y * frame->width + x) <= (frame->width * frame->height - 1)))
-		frame->data[y * frame->width + x] = color;
+	if (x >= 0 && y >= 0 && x <= WIN_WIDTH && y <= WIN_HEIGHT && ((y * WIN_WIDTH + x) <= (WIN_WIDTH * WIN_HEIGHT - 1)))
+		frame->data[y * WIN_WIDTH + x] = color;
 }
 
 static unsigned int	get_code(t_dictionary *dico, char c)
@@ -71,13 +70,13 @@ static unsigned int	get_color(t_data *data, t_ray *ray, int x, int y)
 	char	c;
 
 	if (ray->side && ray->cast[Y] < 0)
-		return (data->info.texture_S.pixies[y * 100 + x]);
+		return (data->info.texture_S.pixies[y * TEX_WIDTH + x]);
 	else if (ray->side && ray->cast[Y] > 0)
-		return (data->info.texture_N.pixies[y * 100 + x]);
+		return (data->info.texture_N.pixies[y * TEX_WIDTH + x]);
 	else if (!ray->side && ray->cast[X] > 0)
-		return (data->info.texture_W.pixies[y * 100 + x]);
+		return (data->info.texture_W.pixies[y * TEX_WIDTH + x]);
 	else if (!ray->side && ray->cast[X] < 0)
-		return (data->info.texture_E.pixies[y * 100 + x]);
+		return (data->info.texture_E.pixies[y * TEX_WIDTH + x]);
 }
 
 static void	calibrate_texture(t_data *data, t_wall *wall, t_ray *ray)
@@ -87,7 +86,8 @@ static void	calibrate_texture(t_data *data, t_wall *wall, t_ray *ray)
 	else
 		wall->x = data->player.pos[Y] + ray->perp_dist * ray->cast[Y];
 	wall->x -= floor(wall->x);
-	wall->tex_X = (int) (wall->x * (double) (TEX_WIDTH));
+	wall->tex_X = (int) (wall->x * (double) TEX_WIDTH);
+	//printf("tex_X: %d\nwall->x: %F\n\n", wall->tex_X, wall->x);
 	if (!ray->side && ray->cast[X] > 0) 
 		wall->tex_X = TEX_WIDTH - wall->tex_X - 1;
 	if (ray->side && ray->cast[Y] < 0)
@@ -112,12 +112,12 @@ void	render_column(t_data *data, t_img *frame, t_ray *ray, int x)
 		wall.end = WIN_HEIGHT - 1;
 	calibrate_texture(data, &wall, ray);
 	y = wall.start;
-	while (y <= wall.end)
+	while (y < wall.end)
 	{
 		wall.tex_Y = (int) wall.pos & (TEX_HEIGHT - 1);
-		//if (x == 10)
-			//printf("%2f\n", wall.step);
 		wall.pos += wall.step;
+		if (x == 1)
+			printf("step: %f\npos %f\n wall->x: %f\ntex (%d, %d)\n\n", wall.step, wall.pos, wall.x, wall.tex_X, wall.tex_Y);
 		put_pixel(frame, x, y, get_color(data, ray, wall.tex_X, wall.tex_Y));
 		++y;
 		//if (x == WIN_WIDTH / 2)
@@ -126,7 +126,7 @@ void	render_column(t_data *data, t_img *frame, t_ray *ray, int x)
 	y = -1;
 	while (++y < wall.start)
 		put_pixel(frame, x, y, data->info.color_F);
-	y = wall.end;
+	y = wall.end - 1;
 	while (++y < WIN_HEIGHT)
 		put_pixel(frame, x, y, data->info.color_C);
 }

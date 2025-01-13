@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/09 21:43:17 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:08:34 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 720
-# define TEX_WIDTH 100
-# define TEX_HEIGHT 100
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 # define X 0
 # define Y 1
 # define ESC_KEY 0xff1b

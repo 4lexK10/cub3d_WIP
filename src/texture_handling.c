@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:03:04 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/09 22:27:22 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:06:21 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ static int	load_img(t_data *data, t_texture *tex, char *path)
 		return (ft_error("error: malloc failed"));
 	img.data = (int *)mlx_get_data_addr(img.ptr_img, &img.bpp, &img.line_length, &img.endian);
 	tex->pixies = (int *)malloc(img.width * img.height * sizeof(int));
-	printf("tex H: %d\ntex W: %d\n", img.height, img.width);
 	if (!tex->pixies)
 		return (mlx_destroy_image(data->mlx, img.ptr_img), ft_error("error: malloc failed"));
 	while (++y < img.height)
