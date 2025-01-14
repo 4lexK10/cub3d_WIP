@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:31:03 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/14 00:14:24 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:09:50 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	set_FOV(t_player *player, char dir)
 static void	get_pos(char **map, int *i, int *j)
 {	
 	*i = -1;
+	*j = -1;
 	while (map[++(*i)])
 	{
 		*j = -1;

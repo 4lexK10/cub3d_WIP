@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:50:53 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/13 22:32:10 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:07:52 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int	ft_error(char *str)
 {
+	size_t	res;
+
+	res = 0;
 	while (*str)	
-		write(STDERR_FILENO, str++, 1);
-	write(STDERR_FILENO, "\n", 1);
+		res += write(STDERR_FILENO, str++, 1);
+	res += write(STDERR_FILENO, "\n", 1);
+	if (res != (ft_strlen(str) + 1))
+		return (2);
 	return (EXIT_FAILURE);
 }
 

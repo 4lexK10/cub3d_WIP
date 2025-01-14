@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 11:58:30 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/14 00:06:38 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:11:39 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	rotation(t_player *player, double a)
 	player->dir[Y] = sinf(a) * x + cosf(a) * y;
 }
 
-static int	wall_check(char **map, t_player *player, double x, double y)
+static void	wall_check(char **map, t_player *player, double x, double y)
 {
 	//print_player(player, "wall_check");
 	if (map[(int) player->pos[Y]][(int) x] != '1')

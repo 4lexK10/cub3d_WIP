@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:03:04 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/13 21:14:49 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:13:00 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	load_img(t_data *data, t_texture *tex, char *path)
 static int	get_texture(t_data *data, t_texture *tex)
 {
 	int		fd;
-	char		*str;
 
 	fd = open(tex->path, O_RDONLY);
 	if (fd == -1)
@@ -56,4 +55,5 @@ int	init_textures(t_data *data)
 		|| get_texture(data, &data->info.texture_E)
 		|| get_texture(data, &data->info.texture_W))
 		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

@@ -6,13 +6,11 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:18:11 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/09 21:55:55 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:36:07 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// hooking management 
 
 static int	key_hook(int keycode, void *param)
 {
@@ -36,12 +34,18 @@ static int	key_hook(int keycode, void *param)
 		raycasting(data, LEFT_ARROW);
 	else if (keycode == RIGHT_ARROW)
 		raycasting(data, RIGHT_ARROW);
+	return (EXIT_SUCCESS);
 }
 
-//int	mouse_hook(int button,int x,int y,void *param);
-//{
-//	if ()
-//}
+static int	mouse_hook(void *param)
+{
+	t_data *data;
+
+	data = (t_data *) param;
+	free_all(data);
+	exit(0);
+	return (EXIT_SUCCESS);
+}
 
 void	event_hook(t_data *data)
 {
@@ -49,6 +53,7 @@ void	event_hook(t_data *data)
 
 	param = (void *) data;
 	mlx_hook(data->win, KEY_DOWN, 1L<<0, &key_hook, param);	
+	mlx_hook(data->win, 17, 0L, &mouse_hook, param);
 }
 
 int	init_mlx(t_data *data)
@@ -71,5 +76,3 @@ int	init_frame(t_data *data, t_img *frame)
 		, &frame->bpp, &frame->line_length, &frame->endian);
 	return (0);
 }
-
-

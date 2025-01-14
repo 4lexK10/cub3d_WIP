@@ -6,7 +6,7 @@
 /*   By: akloster <akloster@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/13 22:30:53 by akloster         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:00:36 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 # define X 0
 # define Y 1
 # define ESC_KEY 0xff1b
-# define W_KEY 0x007a //is AZERTY now
-# define A_KEY 0x0071 //is AZERTY now
+# define W_KEY 0x0077 //is AZERTY now
+# define A_KEY 0x0061 //is AZERTY now
 # define S_KEY 0x0073
 # define D_KEY 0x0064
 # define START 0x0

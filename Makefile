@@ -6,7 +6,7 @@
 #    By: akloster <akloster@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 17:54:38 by akloster          #+#    #+#              #
-#    Updated: 2025/01/13 11:40:26 by akloster         ###   ########.fr        #
+#    Updated: 2025/01/14 17:01:18 by akloster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJ				=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 CC				=	cc
 
-CFLAGS				=	-g3  #-Wall -Wextra -Werror 
+CFLAGS				=	-Wall -Wextra -Werror 
 
 NAME				=	cub3D
 
