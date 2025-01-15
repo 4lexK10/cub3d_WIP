@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
+/*   By: lboumahd <lboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:14:23 by lboumahd          #+#    #+#             */
-/*   Updated: 2025/01/06 23:42:46 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/15 16:06:15 by lboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*get_next_line(int fd)
 	char		*new_line;
 	static char	*remains;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX || fd >= OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX || fd >= 256)
 		return NULL;
 	remains = ft_read_file(remains, fd);
 	if(!remains)

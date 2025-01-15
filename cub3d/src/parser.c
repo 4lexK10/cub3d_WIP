@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
+/*   By: lboumahd <lboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 20:50:36 by lboumahd          #+#    #+#             */
-/*   Updated: 2025/01/08 13:44:02 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/15 18:40:56 by lboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,76 +39,203 @@ int get_height(char **map)
         height++;
     return (height);
 }
-
-int check_first_last_line(char *line)
+// Helper function for checking whitespace
+static int ft_isspace(char c)
 {
-    int j = 0;
-
-    while (line[j])
-    {
-        if (line[j] != '1')
-            return (0);
-        j++;
-    }
-    return (1);
+    return (c == ' ' || c == '\t' || c == '\n' || 
+            c == '\v' || c == '\f' || c == '\r');
 }
-
-int check_borders(char *line)
+int ft_strlen_int(const char *str)
 {
-    int len = get_width(line);
+    int len = 0;
 
-    if (line[0] != '1' || line[len - 1] != '1')
+    if (!str)
         return (0);
-    return (1);
+
+    while (str[len])
+        len++;
+    return (len);
 }
-
-int check_surrounding_walls(char **map, int i, int j)
+int get_2d_len(char **array)
 {
-    if (map[i][j] == ' ')
-    {
-        if ((j > 0 && map[i][j - 1] != '1') ||
-            (j < get_width(map[i]) - 1 && map[i][j + 1] != '1') ||
-            (i > 0 && map[i - 1][j] != '1') ||
-            (map[i + 1] && map[i + 1][j] != '1'))
-            return (0);
-    }
-    return (1);
-}
+    int len = 0;
 
-int check_inner_lines(char **map, int i)
-{
-    int j = 0;
-
-    if (!check_borders(map[i]))
+    if (!array)
         return (0);
+
+    while (array[len])
+        len++;
+    return (len);
+}
+int ft_ptrptrlen(char **array)
+{
+    return get_2d_len(array); // Same as `get_2d_len`
+}
+int	valid_key(int c)
+{
+	if (c == '0'|| c == '1' || c == 'N'|| c == 'W'|| c == 'S'|| c == 'E')
+		return (1);
+	return (0);
+}
+int check_spaces(char **map, int index, int i, int signal)
+{
+    (void)signal;
+    // Validate that spaces/tabs are enclosed
+    if (map[index][i] == ' ' || map[index][i] == '\t')
+    {
+        if ((index - 1 >= 0 && map[index - 1][i] != '1' && map[index - 1][i] != ' ' && map[index - 1][i] != '\t') ||
+            (index + 1 < get_2d_len(map) && map[index + 1][i] != '1' && map[index + 1][i] != ' ' && map[index + 1][i] != '\t') ||
+            (i - 1 >= 0 && map[index][i - 1] != '1' && map[index][i - 1] != ' ' && map[index][i - 1] != '\t') ||
+            (i + 1 < ft_strlen_int(map[index]) && map[index][i + 1] != '1' && map[index][i + 1] != ' ' && map[index][i + 1] != '\t'))
+            return (EXIT_FAILURE);
+    }
+    return (EXIT_SUCCESS);
+}
+
+
+int middle_row_spaces(char **map, int index)
+{
+    int i = 0;
+
+    // Check the first character in the row
+    if (map[index][i] && (map[index][i] == ' ' || map[index][i] == '\t'))
+    {
+        if (check_spaces(map, index, i, 1))
+            return (EXIT_FAILURE);
+    }
+
+    // Check the middle of the row
+    while (map[index][i + 1])
+    {
+        if (map[index][i] == ' ' || map[index][i] == '\t')
+        {
+            if (check_spaces(map, index, i, 0))
+                return (EXIT_FAILURE);
+        }
+        i++;
+    }
+
+    // Check the last character in the row
+    if (map[index][i] && (map[index][i] == ' ' || map[index][i] == '\t'))
+    {
+        if (check_spaces(map, index, i, 2))
+            return (EXIT_FAILURE);
+    }
+
+    return (EXIT_SUCCESS);
+}
+
+int top_row_spaces(char **map)
+{
+    int i = 0;
+    int j = 0;
 
     while (map[i][j])
     {
-        if (!check_surrounding_walls(map, i, j))
-            return (0);
-        j++;
+        if (ft_isspace(map[i][j]))
+        {
+            if (map[i + 1] != NULL && map[i + 1][j])
+            {
+                if (map[i + 1][j] != '1' && !ft_isspace(map[i + 1][j]))
+                    return (EXIT_FAILURE);
+                j++;
+            }
+            else
+                return (EXIT_FAILURE);
+        }
+        else
+            j++;
     }
-    return (1);
+    return (EXIT_SUCCESS);
 }
+int bot_row_spaces(char **map)
+{
+    int i = get_2d_len(map) - 1;
+    int j = 0;
+
+    while (map[i][j])
+    {
+        if (ft_isspace(map[i][j]))
+        {
+            if (map[i - 1] != NULL && map[i - 1][j])
+            {
+                if (map[i - 1][j] != '1' && !ft_isspace(map[i - 1][j]))
+                    return (EXIT_FAILURE);
+                j++;
+            }
+            else
+                return (EXIT_FAILURE);
+        }
+        else
+            j++;
+    }
+    return (EXIT_SUCCESS);
+}
+
+int parse_walls(char *str)
+{
+    int i = 0;
+
+    if (!str || ft_strlen_int(str) == 0) // Check for empty rows
+        return (EXIT_FAILURE);
+
+    if (str[0] != '1' && str[0] != ' ' && str[0] != '\t') // First character must be part of the wall
+        return (EXIT_FAILURE);
+
+    if (str[ft_strlen_int(str) - 1] != '1' && str[ft_strlen_int(str) - 1] != ' ' && str[ft_strlen_int(str) - 1] != '\t') // Last character must be part of the wall
+        return (EXIT_FAILURE);
+
+    while (str[i])
+    {
+        if (!valid_key(str[i]) && str[i] != ' ' && str[i] != '\t') // Invalid characters
+            return (EXIT_FAILURE);
+        i++;
+    }
+
+    return (EXIT_SUCCESS);
+}
+
+// int parse_walls(char *str)
+// {
+//     int i = 0;
+
+//     if (!str || ft_strlen_int(str) == 0) // Check for empty rows
+//         return (EXIT_FAILURE);
+
+//     if (str[0] != '1' || str[ft_strlen_int(str) - 1] != '1') // Check for enclosing walls
+//         return (EXIT_FAILURE);
+
+//     while (str[i])
+//     {
+//         if (!valid_key(str[i]) && !ft_isspace(str[i])) // Invalid characters
+//             return (EXIT_FAILURE);
+//         i++;
+//     }
+
+//     return (EXIT_SUCCESS);
+// }
 
 int check_walls(t_map *raw_map)
 {
-    int i = 0;
+    int i;
     char **map;
 
     map = raw_map->map_tab;
-    if (!map || !map[0])
+    if (!map || get_2d_len(map) == 0)
+    {
+        ft_error("No map provided\n");
+        exit(1);
+    }
+
+    // Check the first and last rows
+    if (parse_walls(map[0]) || parse_walls(map[get_2d_len(map) - 1]))
         return (0);
 
-    if (!check_first_last_line(map[0]) || !check_first_last_line(map[get_height(map) - 1]))
-        return (0); 
-
-    i = 1;
-    while (map[i + 1])
+    // Validate the middle rows
+    for (i = 1; i < get_2d_len(map) - 1; i++)
     {
-        if (!check_inner_lines(map, i))
+        if (middle_row_spaces(map, i))
             return (0);
-        i++;
     }
 
     return (1);
@@ -146,12 +273,89 @@ void get_raw_data(t_data *data, int fd)
             free(line);
         }
     }
-    change_to_matrix(data->raw_map);
-   
+    change_to_map_tab(data->raw_map);
+   //check player exist
     if(!check_walls(data->raw_map))
         {
+            printf("top or bot\n");
             ft_error("map not closed");
             exit(1);
         }
     close(fd);
 }
+
+// int check_first_last_line(char *line)
+// {
+//     int j = 0;
+
+//     while (line[j])
+//     {
+//         if (line[j] != '1')
+//             return (0);
+//         j++;
+//     }
+//     return (1);
+// }
+
+// int check_borders(char *line)
+// {
+//     int len = get_width(line);
+
+//     if (line[0] != '1' || line[len - 1] != '1')
+//         return (0);
+//     return (1);
+// }
+
+// int check_surrounding_walls(char **map, int i, int j)
+// {
+//     if (map[i][j] == ' ')
+//     {
+//         if ((j > 0 && map[i][j - 1] != '1') ||
+//             (j < get_width(map[i]) - 1 && map[i][j + 1] != '1') ||
+//             (i > 0 && map[i - 1][j] != '1') ||
+//             (map[i + 1] && map[i + 1][j] != '1'))
+//             return (0);
+//     }
+//     return (1);
+// }
+
+// int check_inner_lines(char **map, int i)
+// {
+//     int j = 0;
+
+//     if (!check_borders(map[i]))
+//         return (0);
+
+//     while (map[i][j])
+//     {
+//         if (!check_surrounding_walls(map, i, j))
+//             return (0);
+//         j++;
+//     }
+//     return (1);
+// }
+
+// int check_walls(t_map *raw_map)
+// {
+//     int i = 0;
+//     char **map;
+
+//     map = raw_map->map_tab;
+//     if (!map || !map[0])
+//         return (0);
+
+//     if (!check_first_last_line(map[0]) || !check_first_last_line(map[get_height(map) - 1]))
+//         return (0); 
+
+//     i = 1;
+//     while (map[i + 1])
+//     {
+//         if (!check_inner_lines(map, i))
+//             return (0);
+//         i++;
+//     }
+
+//     return (1);
+// }
+
+

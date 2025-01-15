@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
+/*   By: lboumahd <lboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 15:06:11 by lboumahd          #+#    #+#             */
-/*   Updated: 2025/01/08 13:17:05 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/15 17:02:06 by lboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char    *add_to_line(char *map_line, char *line)
 	return (arr);
 }
 
-void    change_to_matrix(t_map *map)
+void    change_to_map_tab(t_map *map)
 {
     map->map_tab = ft_split(map->map_arr, ';');
     //resize_map(map);

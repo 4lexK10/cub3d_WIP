@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linaboumahdi <linaboumahdi@student.42.f    +#+  +:+       +#+        */
+/*   By: lboumahd <lboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:05:23 by akloster          #+#    #+#             */
-/*   Updated: 2025/01/08 01:29:57 by linaboumahd      ###   ########.fr       */
+/*   Updated: 2025/01/15 17:02:06 by lboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void get_raw_data(t_data *data, int fd);
 int get_number_of_lines(char *path);
 //parser utils
 char    *add_to_line(char *map_line, char *line);
-void    change_to_matrix(t_map *map);
+void    change_to_map_tab(t_map *map);
 
 //error
 
